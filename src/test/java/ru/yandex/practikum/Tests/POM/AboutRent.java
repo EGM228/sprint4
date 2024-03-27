@@ -15,37 +15,47 @@ public class AboutRent {
     }
     // поле даты доставки
     private final By deliveryTimeField = By.cssSelector("[placeholder='* Когда привезти самокат']");
-    // кнопка выбора даты. 30 число
-    private final By datePicked = By.xpath(".//div[contains(@class,'day--030')]");
+    // кнопка выбора даты
+    private final String datePicked = ".//div[contains(@class,'day--";
+    // закрытие xpath для datePicked
+    private final String closerForDatePicked = "')]";
+
     // треугольник в поле выбора времени аренды справа
     private final By rentTimeField = By.xpath(".//span");
-    // кнопка выбора времени аренды. 1 сутки
-    private final By rentTimePicked = By.xpath(".//div[@class='Dropdown-menu']/div[1]");
+    // кнопка выбора времени аренды
+    private final String rentTimePicked = ".//div[@class='Dropdown-menu']/div[";
+    // закрытие xpath для rentTimePicked
+    private final String closerForRentTimePicked = "]";
+
     // кнопка выбора цвета. черный
-    private final By color = By.cssSelector("[for='black']");
+    private final String color = "[for='";
+    // закрытие cssSelector для color
+    private final String closerForColor = "']";
+
     // поле комментария для курьера
     private final By comment = By.cssSelector("[placeholder='Комментарий для курьера']");
     // кнопка "Заказать"
     private final By orderButton = By.xpath(".//div[contains(@class,'Order_Buttons')]/button[2]");
 
-    public void fillDateField(){
+
+    public void fillDateField(String day){
         new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(orderButton));
         driver.findElement(deliveryTimeField).click();
-        driver.findElement(datePicked).click();
+        driver.findElement(By.xpath(datePicked + day + closerForDatePicked)).click();
     }
 
-    public void fillRentTimeField(){
+    public void fillRentTimeField(String howMuchDays){
         driver.findElement(rentTimeField).click();
-        new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(rentTimePicked));
-        driver.findElement(rentTimePicked).click();
+        new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME);//.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(rentTimePicked + howMuchDays + closerForRentTimePicked)));
+        driver.findElement(By.xpath(rentTimePicked + howMuchDays + closerForRentTimePicked)).click();
     }
 
-    public void fillColorField(){
-        driver.findElement(color).click();
+    public void fillColorField(String pickedColor){
+        driver.findElement(By.cssSelector(color + pickedColor + closerForColor)).click();
     }
 
-    public void fillCommentField(){
-        driver.findElement(comment).sendKeys(EnvConfig.COMMENT_FOR_COURIER);
+    public void fillCommentField(String commentForCourier){
+        driver.findElement(comment).sendKeys(commentForCourier);
     }
 
     public void clickOrderButton(){

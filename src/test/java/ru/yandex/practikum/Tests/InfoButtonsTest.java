@@ -30,14 +30,14 @@ public class InfoButtonsTest {
     @Parameterized.Parameters
     public static Object[][] dataForTests() {
         return new Object[][] {
-                { ".//div[contains(@id,'accordion__heading-0')]", ".//div[@id='accordion__panel-0']"},
-                { ".//div[contains(@id,'accordion__heading-1')]", ".//div[@id='accordion__panel-1']"},
-                { ".//div[contains(@id,'accordion__heading-2')]", ".//div[@id='accordion__panel-2']"},
-                { ".//div[contains(@id,'accordion__heading-3')]", ".//div[@id='accordion__panel-3']"},
-                { ".//div[contains(@id,'accordion__heading-4')]", ".//div[@id='accordion__panel-4']"},
-                { ".//div[contains(@id,'accordion__heading-5')]", ".//div[@id='accordion__panel-5']"},
-                { ".//div[contains(@id,'accordion__heading-6')]", ".//div[@id='accordion__panel-6']"},
-                { ".//div[contains(@id,'accordion__heading-7')]", ".//div[@id='accordion__panel-7']"},
+                { "0", "0"},
+                { "1", "1"},
+                { "2", "2"},
+                { "3", "3"},
+                { "4", "4"},
+                { "5", "5"},
+                { "6", "6"},
+                { "7", "7"},
         };
     }
 

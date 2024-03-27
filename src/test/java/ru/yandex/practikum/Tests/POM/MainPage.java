@@ -35,4 +35,12 @@ public class MainPage {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
         driver.findElement(bottomRequestButton).click();
     }
+
+    public void clickRequestButtonHeaderOrBottom(String headOrBot){
+        if ("header".equals(headOrBot)){
+            clickHeaderRequestButton();
+        } else if ("bottom".equals(headOrBot)){
+            clickBottomRequestButton();
+        }
+    }
 }

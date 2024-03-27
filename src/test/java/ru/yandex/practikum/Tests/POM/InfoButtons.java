@@ -11,6 +11,8 @@ import praktikum.EnvConfig;
 public class InfoButtons {
     // драйвер
     private final WebDriver driver;
+    private final String topHover = "accordion__heading-";
+    private final String underText = "accordion__panel-";
     // конструктор
     public InfoButtons(WebDriver driver){
         this.driver = driver;
@@ -26,17 +28,17 @@ public class InfoButtons {
     }
 
     public void scrollDown(String locator){
-        WebElement element = driver.findElement(By.xpath(locator));
+        WebElement element = driver.findElement(By.id(topHover + locator));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void clickHoverButton(String locator){
-        new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-        driver.findElement(By.xpath(locator)).click();
+        new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(By.id(topHover + locator)));
+        driver.findElement(By.id(topHover + locator)).click();
     }
 
     public void checkRightText(String expected){
-        new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(expected)));
-        assert driver.findElement(By.xpath(expected)).isDisplayed();
+        new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(By.id(underText+expected)));
+        assert driver.findElement(By.id(underText+expected)).isDisplayed();
     }
 }

@@ -18,7 +18,9 @@ public class WhoIsTheScooterFor {
     // поле метро
     private final By metro = By.cssSelector("[placeholder='* Станция метро']");
     // кнопка выбора станции "Бульвар Рокосовского"
-    private final By metroStation = By.cssSelector("[data-index='0']");
+    private final String metroStation = "[data-index='";
+    // закрытие для cssSelector
+    private final String closingCssSelectorForMetro = "']";
     // поле номера телефона
     private final By phoneNumber = By.cssSelector("[placeholder='* Телефон: на него позвонит курьер']");
     // кнопка "Далее"
@@ -28,26 +30,26 @@ public class WhoIsTheScooterFor {
         this.driver = driver;
     }
 
-    public void fillFirstNameField(){
+    public void fillFirstNameField(String firstName){
         new WebDriverWait(driver, EnvConfig.BASE_DRIVER_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(ButtonNext));
-        driver.findElement(firstNameField).sendKeys(EnvConfig.FIRSTNAME_FOR_ORDER);
+        driver.findElement(firstNameField).sendKeys(firstName);
     }
 
-    public void fillLastNameField(){
-        driver.findElement(lastNameField).sendKeys(EnvConfig.LASTNAME_FOR_ORDER);
+    public void fillLastNameField(String lastName){
+        driver.findElement(lastNameField).sendKeys(lastName);
     }
 
-    public void fillAddressField(){
-        driver.findElement(address).sendKeys(EnvConfig.ADDRESS_FOR_ORDER);
+    public void fillAddressField(String Address){
+        driver.findElement(address).sendKeys(Address);
     }
 
-    public void fillMetroField(){
+    public void fillMetroField(String id){
         driver.findElement(metro).click();
-        driver.findElement(metroStation).click();
+        driver.findElement(By.cssSelector(metroStation+ id + closingCssSelectorForMetro)).click();
     }
 
-    public void fillPhoneNumberField(){
-        driver.findElement(phoneNumber).sendKeys(EnvConfig.PHONE_NUMBER_FOR_ORDER);
+    public void fillPhoneNumberField(String number){
+        driver.findElement(phoneNumber).sendKeys(number);
     }
 
     public void clickNextButton(){
